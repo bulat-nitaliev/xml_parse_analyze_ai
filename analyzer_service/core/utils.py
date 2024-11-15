@@ -46,8 +46,10 @@ def lst_products(path, lst_product=None)->list:
 
 def insert_data(data):
     db = settings.DATABASES['default']
-    
-    dsn = f'dbname={db['NAME']} user={db['USER']} password={db['PASSWORD']} host={db['HOST']} port={db['PORT']}'
+    print(db)
+    name, user, pwd, host, port = db['NAME'], db['USER'], db['PASSWORD'], db['HOST'], db['PORT']
+
+    dsn = f'''dbname={name} user={user} password={pwd} host={host} port={port}'''
     with psycopg2.connect(dsn) as conn:
         cur = conn.cursor()
         key = '''insert into core_product (prod_id, name, quantity, price, category, date_product) values %s'''
@@ -57,8 +59,9 @@ def insert_data(data):
 
 def generate_report(date):
     db = settings.DATABASES['default']
+    name, user, pwd, host, port = db['NAME'], db['USER'], db['PASSWORD'], db['HOST'], db['PORT']
     
-    dsn = f'dbname={db['NAME']} user={db['USER']} password={db['PASSWORD']} host={db['HOST']} port={db['PORT']}'
+    dsn = f'''dbname={name} user={user} password={pwd} host={host} port={port}'''
     
     date_str = datetime.strptime(date, '%Y-%m-%d').date()
 

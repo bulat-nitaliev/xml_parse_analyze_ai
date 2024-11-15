@@ -102,6 +102,9 @@ export default {
             this.path1 = ''
         } catch (error) {
             console.log(error);
+            this.message = error
+            this.isDialog = true
+            this.isLoader = false
         }
     },
     async report(dt){
