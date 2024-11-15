@@ -1,4 +1,4 @@
-# frontend_ws_chat
+# frontend
 
 ## Project setup
 ```

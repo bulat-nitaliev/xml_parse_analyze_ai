@@ -1,8 +1,8 @@
 <template>
     <div class="navbar">        
-        <div @click="$router.push('/')">Kapital</div>
+        <div @click="$router.push('/')">XML Parser & AI Analyzer Service</div>
         <div class="navbar__btns">
-            <my-button v-if="isAuth" @click="$router.push('/room')" >Room</my-button>
+            <my-button v-if="isAuth" @click="$router.push('/')" >Home</my-button>
             <my-button v-if="!isAuth" @click="$router.push('/login')" >Login</my-button>
             <my-button v-if="isAuth" @click="userLogout" >Logout</my-button>
             <my-button v-if="!isAuth" @click="$router.push('/registr')" >Register</my-button>

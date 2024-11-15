@@ -1,8 +1,8 @@
 from django.db import models
-# from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser
 
 
-# class User(AbstractUser):...
+class User(AbstractUser):...
 
 class Product(models.Model):
     prod_id = models.IntegerField()
@@ -16,6 +16,8 @@ class Product(models.Model):
         return self.name
     
 class AnswerLLm(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    prompt = models.TextField()
     answer = models.TextField()
     dt_create = models.DateTimeField(auto_now_add=True)
 

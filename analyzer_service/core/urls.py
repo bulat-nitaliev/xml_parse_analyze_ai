@@ -1,12 +1,12 @@
 from django.urls import path
-from core.views import ProductView, ParseXmlView, AnalyzeView, AnalyticalReport
+from core.views import ProductView, ParseXmlView, AnalyzeView, AnalyticalReport, LLMView, UserViewSet
 from rest_framework.routers import SimpleRouter
 
 router = SimpleRouter()
 
-router.register('product', ProductView, 'product')
-
-
+router.register('users', UserViewSet, 'users')
+router.register('product', ProductView, 'product') 
+router.register('llm', LLMView, 'llm')
 
 urlpatterns = [
     path('parse_xml/', ParseXmlView.as_view()),
@@ -16,3 +16,5 @@ urlpatterns = [
 ]
 
 urlpatterns += router.urls
+
+
