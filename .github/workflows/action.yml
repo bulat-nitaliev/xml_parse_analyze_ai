@@ -16,17 +16,12 @@ jobs:
     - uses: actions/checkout@v4
     - name: Создание файла .env  
       run:  
-        echo "PG_DATABASE=PG_DATABASE" >> analyzer_service/.env  
-        echo "PG_USER=PG_USER" >> analyzer_service/.env 
-        echo "PG_PASSWORD=PG_PASSWORD" >> analyzer_service/.env  
-        echo "PG_HOST=PG_HOST" >> analyzer_service/.env 
-        echo "PG_PORT=PG_PORT" >> analyzer_service/.env  
-        echo "TOKEN=TOKEN" >> analyzer_service/.env 
-
-
-
-
- 
+        echo "PG_DATABASE=test" >> analyzer_service/.env  
+        echo "PG_USER=user" >> analyzer_service/.env 
+        echo "PG_PASSWORD=password" >> analyzer_service/.env  
+        echo "PG_HOST=db" >> analyzer_service/.env 
+        echo "PG_PORT=5432" >> analyzer_service/.env  
+        echo "TOKEN=token" >> analyzer_service/.env 
 
     - name: Build the images and start the containers
       run: |
