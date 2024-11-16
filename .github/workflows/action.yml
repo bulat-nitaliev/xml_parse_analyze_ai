@@ -15,13 +15,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Создание файла .env  
-        run:  
-          echo "PG_DATABASE=PG_DATABASE" >> .env  
-          echo "PG_USER=PG_USER" >> .env 
-          echo "PG_PASSWORD=PG_PASSWORD" >> .env  
-          echo "PG_HOST=PG_HOST" >> .env 
-          echo "PG_PORT=PG_PORT" >> .env  
-          echo "TOKEN=TOKEN" >> .env 
+      run:  
+        echo "PG_DATABASE=PG_DATABASE" >> .env  
+        echo "PG_USER=PG_USER" >> .env 
+        echo "PG_PASSWORD=PG_PASSWORD" >> .env  
+        echo "PG_HOST=PG_HOST" >> .env 
+        echo "PG_PORT=PG_PORT" >> .env  
+        echo "TOKEN=TOKEN" >> .env 
 
 
 
