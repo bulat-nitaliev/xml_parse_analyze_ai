@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Создание файла .env  
-        run: |  
+        run:  
           echo "PG_DATABASE=PG_DATABASE" >> .env  
           echo "PG_USER=PG_USER" >> .env 
           echo "PG_PASSWORD=PG_PASSWORD" >> .env  
