@@ -56,67 +56,57 @@ services:
     networks: 
       - net
 
-#   worker:
-#     build:
-#       context: ./practianalyzer_servicec
-#     container_name: worker
-#     hostname: worker
-#     networks: 
-#       - net
-#     entrypoint: celery
-#     command: -A celery_app.app worker --loglevel=info
-#     volumes:
-#       - worker_vol:/analyzer_service/core
-#     links:
-#       - redis
-#     depends_on:
-#       - redis
-#       - db
-#     environment:
-#       - POSTGRES_DB=postgres
-#       - POSTGRES_USER=postgres
-#       - POSTGRES_PASSWORD=postgres
+  worker:
+    build:
+      context: ./analyzer_service
+    container_name: worker
+    hostname: worker
+    networks: 
+      - net
+    entrypoint: celery
+    command: -A celery_app.app worker --loglevel=info
+    links:
+      - redis
+    depends_on:
+      - redis
+      - db
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
 
-#   flower:
-#     build:
-#       context: ./practic
-#     hostname: flower
-#     ports:
-#       - 5555:5555
-#     networks: 
-#       - net
-#     container_name: flower
-#     entrypoint: celery
-#     command: -A celery_app.app flower --loglevel=info
-#     volumes:
-#       - flower_vol:/practic/practic
-#     links:
-#       - redis
-#     depends_on:
-#       - redis
+  flower:
+    build:
+      context: ./analyzer_service
+    hostname: flower
+    ports:
+      - 5555:5555
+    networks: 
+      - net
+    container_name: flower
+    entrypoint: celery
+    command: -A celery_app.app flower --loglevel=info
+    links:
+      - redis
+    depends_on:
+      - redis
 
-#   scheduler:
-#     build:
-#       context: ./practic
-#     hostname: scheduler
-#     networks: 
-#       - net
-#     entrypoint: celery
-#     command: -A celery_app.app beat --loglevel=info
-#     container_name: scheduler
-#     volumes:
-#       - scheduler_vol:/practic/practic
-#     links:
-#       - redis
-#     depends_on:
-#       - redis
-#       - worker
+  scheduler:
+    build:
+      context: ./analyzer_service
+    hostname: scheduler
+    networks: 
+      - net
+    entrypoint: celery
+    command: -A celery_app.app beat --loglevel=info
+    container_name: scheduler
+    
+    links:
+      - redis
+    depends_on:
+      - redis
+      - worker
 
-# volumes:
-#   static_vol:
-#   worker_vol:
-#   flower_vol:
-#   scheduler_vol:
 
 networks:
   net:

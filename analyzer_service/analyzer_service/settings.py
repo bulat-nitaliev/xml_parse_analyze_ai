@@ -97,6 +97,13 @@ DATABASES = {
 
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -160,6 +167,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DATETIME_FORMAT': "%Y-%m-%dT%H:%M:%S",
    
 }
 
@@ -171,7 +179,17 @@ SPECTACULAR_SETTINGS = {
     # OTHER SETTINGS
 }
 
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+# CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+
+
+REDIS_HOST = 'redis'
+REDIS_PORT = '6379'
+CELERY_BROKER_URL = 'redis://'+REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://'+REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 # CACHES = {
 #     "default": {

@@ -15,13 +15,9 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     'send-spam': {
-        'task' : 'core.tasks.send_mail',
-        'schedule': crontab(minute=0, hour=21),
+        'task' : 'core.tasks.debug_task',
+        'schedule': crontab(minute=0, hour=9),
     },
    
 }
 
-@app.task()
-def debug_task():
-    time.sleep(20)
-    print('Hello debug_task')

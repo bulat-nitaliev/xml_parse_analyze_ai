@@ -18,6 +18,14 @@ class UserViewSet(CreateModelMixin, ListModelMixin, GenericViewSet):
     '''Вьюшка создания пользователя и получения списков пользователей'''
     queryset = User.objects.all()
     permission_classes = [AllowAny,]
+
+    def get_permissions(self):  
+        if self.action == 'create':  
+            permission_classes = [AllowAny,]  
+        else:  
+            permission_classes = [IsAuthenticated,]  
+        return [permission() for permission in permission_classes]
+
     def get_serializer_class(self):
         if self.action == 'create':
            return UserRegistrationSerializer
