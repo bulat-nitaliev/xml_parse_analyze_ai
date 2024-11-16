@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the images and start the containers
+      run: |
+        export GITHUB_WORKFLOW=True
+        export MODE="Test"
+        docker compose  build
+        docker compose  up -d
+        # run: docker compose up -d --build
+    - name: test django
+      run: |
+        docker compose exec api python manage.py test
+
+    - name: Stop containers
+      if: always()
+      run: docker compose down
