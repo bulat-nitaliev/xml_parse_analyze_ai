@@ -30,6 +30,12 @@ jobs:
         docker compose  build
         docker compose  up -d
         # run: docker compose up -d --build
+    - name: django
+      run: |
+        docker compose run --rm  api python manage.py makemigrations
+    - name: migrate
+      run: |
+        docker compose run --rm  api python manage.py migrate
     - name: test django
       run: |
         docker compose run --rm  api python manage.py test
